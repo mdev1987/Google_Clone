@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { MagnifyingGlassIcon, MicrophoneIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import google from '../../public/assets/images/google.png';
 import User from "./User";
+import SearchHeaderOptions from "./SearchHeaderOptions";
 
 export default function SearchHeader() {
     const router = useRouter();
@@ -13,10 +14,10 @@ export default function SearchHeader() {
     }
     const search = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const term = searchInputRef.current?.value.trim()
+        const term = searchInputRef.current?.value.trim();
         if (!term) return;
-        router.push(`/search?term=${term}`)
-
+        const searchType = (router.query?.searchType || '') === 'image' ? '&searchType=image' : '';
+        router.push(`/search?term=${term}${searchType}`)
     }
     return (
         <header className="sticky top-0 bg-white">
@@ -52,6 +53,7 @@ export default function SearchHeader() {
                 </form>
                 <User className="ml-auto whitespace-nowrap" />
             </div>
+            <SearchHeaderOptions />
         </header>
     )
 }
