@@ -1,19 +1,20 @@
 import SearchHeader from "@/components/SearchHeader";
+import SearchResults from "@/components/SearchResults";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import mockResponse from '../mock-response.json'
 
-export default function search({ data, error }: { data: any, error?: string }) {
+export default function search(props: any) {
+    const router = useRouter()
+    const searchTerm = `${router.query?.term?.toString().trim()} - Search Page` || 'Search Page'
     return (
         <>
             <Head>
-                <title>Search Page</title>
+                <title>{searchTerm}</title>
             </Head>
-
             <SearchHeader />
-
-
-            {/* Search Result */}
+            <SearchResults {...props} />
         </>
     )
 }
@@ -28,8 +29,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     if (mockData) {
         return {
             props: {
-                error: false,
-                data: mockResponse
+                results: mockResponse,
+                error: null,
             }
         }
     }
@@ -38,14 +39,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     if (response.ok) {
         return {
             props: {
-                data: await response.json(),
-                error: false
+                results: await response.json(),
+                error: null,
             }
         }
     }
     return {
         props: {
-            data: null,
+            results: null,
             error: `Error: ${response.status}: ${response.statusText}`
         }
     }
