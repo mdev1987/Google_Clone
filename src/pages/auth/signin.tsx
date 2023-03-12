@@ -13,6 +13,7 @@ export default function signin({ providers }: { providers: Record<LiteralUnion<B
                 {Object.values(providers).map(provider => (
                     <div className="flex flex-col items-center" key={provider.id}>
                         <Image
+                            draggable={false}
                             className="w-52 object-cover"
                             src={google}
                             placeholder={'blur'}

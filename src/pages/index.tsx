@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { MagnifyingGlassIcon, MicrophoneIcon } from '@heroicons/react/20/solid';
 import google from '../../public/assets/images/google.png'
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <form className="flex flex-col items-center mt-20" >
         <Image src={google}
           alt="google"
+          draggable={false}
           className="object-cover"
           placeholder={"blur"}
           width={300} height={100} />
@@ -38,6 +40,7 @@ export default function Home() {
         </div>
       </form>
       {/* Footer */}
+      <Footer />
     </div>
   )
 }
