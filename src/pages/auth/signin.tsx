@@ -5,7 +5,6 @@ import Image from "next/image";
 import google from '../../../public/assets/images/google.png'
 
 export default function signin({ providers }: { providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> }) {
-    console.dir(providers);
     return (
         <>
             <Header />

@@ -6,6 +6,7 @@ import google from '../../public/assets/images/google.png'
 import Footer from "@/components/Footer";
 import { useRouter } from "next/router";
 import React, { useRef } from "react";
+import randomWords from 'random-words';
 
 
 export default function Home() {
@@ -15,6 +16,12 @@ export default function Home() {
     event.preventDefault()
     const term = searchInputRef.current?.value.trim() || ''
     if (!term) return;
+    router.push(`/search?term=${term}`)
+  }
+
+  const randomSearch = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault()
+    const term = randomWords(1);
     router.push(`/search?term=${term}`)
   }
   return (
@@ -48,7 +55,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col sm:flex-row w-[50%] space-y-2 mt-8 sm:space-y-0 sm:space-x-4 justify-center">
           <button onClick={search} className="btn">Google Search</button>
-          <button className="btn">I'm Feeling Lucky</button>
+          <button onClick={randomSearch} className="btn">I'm Feeling Lucky</button>
         </div>
       </form>
       {/* Footer */}

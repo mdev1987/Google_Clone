@@ -1,6 +1,6 @@
 import { signIn, signOut, useSession } from "next-auth/react"
 
-export default function User({ className }: { className: string }) {
+export default function User({ className = "" }: { className?: string }) {
     const { data: session } = useSession()
     if (session) {
         if (session.user?.image) {
