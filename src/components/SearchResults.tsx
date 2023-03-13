@@ -1,7 +1,14 @@
 import Parser from 'html-react-parser';
+import PaginationButtons from './PaginationButtons';
 
 export default function SearchResults({ results, error }: { results?: any, error?: string }) {
-    console.log(results);
+    if (error) {
+        return (
+            <div className="w-full mx-auto px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52 mt-5 text-red-500 font-semibold">
+                {error}
+            </div>
+        )
+    }
     return (
         <div className="w-full mx-auto px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52">
             <p className="text-gray-600 text-sm mb-5 mt-3" >
@@ -12,12 +19,13 @@ export default function SearchResults({ results, error }: { results?: any, error
                     <div className="group">
                         <a className='text-sm truncate' href={result.link}>{result.formattedUrl}</a>
                         <a className='group-hover:underline text-blue-700 visited:text-purple-800 ' target={'_blank'} href={result.link}>
-                            <h2 className='truncate text-xl font-semibold'>{result.title}</h2>
+                            <h2 className='truncate text-xl font-medium'>{result.title}</h2>
                         </a>
                     </div>
                     <p className='text-gray-600'>{Parser(result.htmlSnippet)}</p>
                 </div>
             ))}
+            <PaginationButtons />
         </div>
     )
 }
