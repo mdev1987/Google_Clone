@@ -2,15 +2,15 @@ import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-
 export default function PaginationButtons() {
     const router = useRouter()
     const term = router.query?.term?.toString() || ''
     const searchType = router.query?.searchType ? `&searchType=${router.query.searchType}` : '';
     const startIndex = Math.max(1, Math.min((router.query?.start ? Number(router.query.start) : 1), 91));
     return (
-        <div className='flex px-9 pb-4 justify-between sm:justify-start sm:space-x-44 sm:px-0 text-blue-700'>
-
+        <div className={`flex px-9 pb-4 justify-between 
+                    ${router.query?.searchType === 'image' ? 'sm:justify-center' : 'sm:justify-start'} 
+                    sm:space-x-52 sm:px-0 text-blue-700`}>
             {(startIndex > 1) ? (<Link href={`/search?term=${term}${searchType}&start=${Math.max(1, startIndex - 10)}`}>
                 <div className='cursor-pointer flex flex-col items-center hover:underline'>
                     <ChevronLeftIcon className='h-5' />

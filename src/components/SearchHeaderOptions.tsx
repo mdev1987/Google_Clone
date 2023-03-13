@@ -13,7 +13,7 @@ export default function SearchHeaderOptions() {
                         text-sm text-gray-700 lg:pl-52 
                         lg:justify-start">
             <SearchHeaderOption title="all" Icon={MagnifyingGlassIcon}
-                selected={searchType === ''} />
+                selected={searchType === '' || searchType !== 'image'} />
             <SearchHeaderOption title="images" Icon={PhotoIcon}
                 selected={searchType === 'image'} />
         </div>
